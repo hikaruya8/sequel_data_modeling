@@ -20,16 +20,21 @@ class FactorAnalysis:
     for i in x_list:
       sum += i
     u = sum/5
-    print(u)
+    return u
 
+  def x_upadate(self, x_list, u):
+    updated_x = []
+    for x in x_list:
+      updated_x.append(x - u)
+    return updated_x
 
 #初期値入力 いちいち入力がめんどいので後でinputに戻す
 # print('b3, b2, b1, b0 の順番に半角スペースを空けて入力してください')
 # b3, b2 , b1, b0 = map(int, input().split())
+
 b3, b2, b1, b0 = 1, 4, 0, 3 #初期値.あとでinputできるように上と取り替える
 
-#インスタンス作成
-b = FactorAnalysis(b3, b2, b1, b0)
+b = FactorAnalysis(b3, b2, b1, b0) #インスタンス作成
 
 #xn導出
 x1, x2, x3, x4, x5 = b.calc_x()
@@ -39,4 +44,11 @@ print('x1:{} , x2:{} ,x3:{} ,x4:{} , x5:{}'.format(x1, x2, x3, x4, x5))
 x_list = np.array([x1, x2, x3, x4, x5])
 
 #μ導出
-b.update_u(x_list)
+u = b.update_u(x_list)
+print('μ:{}'.format(u))
+
+#X'n導出
+updated_x = b.x_upadate(x_list, u)
+print("X'n{}".format(updated_x))
+
+
