@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class FactorAnalysis:
   def __init__(self, b3, b2, b1, b0):
@@ -48,10 +49,17 @@ x_list = np.array([x1, x2, x3, x4, x5])
 u = b.update_u(x_list)
 print('μ:{}'.format(u))
 
-#X'n導出
+#X'n導出 X'n=アップデート後のX
 updated_x = b.x_upadate(x_list, u)
 print("X'n{}".format(updated_x))
 
-#モデルの潜在変数zの導出
+# #モデルの潜在変数zの導出 z=μの単位ベクトル
+# norm_u = np.linalg.norm(u)
+# z = u/norm_u
+# print('潜在変数 (factor_z) {}'.format(z))
+
+#Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
+
+
 
 
