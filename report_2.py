@@ -36,19 +36,22 @@ b3, b2, b1, b0 = 1, 4, 0, 3 #初期値.あとでinputできるように上と取
 
 b = FactorAnalysis(b3, b2, b1, b0) #インスタンス作成
 
-#xn導出
+#D次元の確率変数Xn導出, X1=1次元??
+#D=Nこの観測点(データ集合）
 x1, x2, x3, x4, x5 = b.calc_x()
 print('x1:{} , x2:{} ,x3:{} ,x4:{} , x5:{}'.format(x1, x2, x3, x4, x5))
 
-#xnリスト化(numpy)
+#Xnリスト化(numpy)
 x_list = np.array([x1, x2, x3, x4, x5])
 
-#μ導出
+#mean vector(平均ベクトル) μ導出
 u = b.update_u(x_list)
 print('μ:{}'.format(u))
 
 #X'n導出
 updated_x = b.x_upadate(x_list, u)
 print("X'n{}".format(updated_x))
+
+#モデルの潜在変数zの導出
 
 
