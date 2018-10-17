@@ -43,7 +43,7 @@ x1, x2, x3, x4, x5 = b.calc_x()
 print('x1:{} , x2:{} ,x3:{} ,x4:{} , x5:{}'.format(x1, x2, x3, x4, x5))
 
 #Xnリスト化(numpy)
-x_list = np.array([x1, x2, x3, x4, x5])
+x_list = np.array([x1, x2, x3, x4, x5], dtype='float')
 
 #mean vector(平均ベクトル) μ導出
 u = b.update_u(x_list)
@@ -52,6 +52,10 @@ print('μ:{}'.format(u))
 #X'n導出 X'n=アップデート後のX
 updated_x = b.x_upadate(x_list, u)
 print("X'n{}".format(updated_x))
+
+sigma_z_x = 1/2 #Σ(z|x)を求める。簡単なので手計算
+zn = sigma_z_x * (x_list - u)
+print('それぞれの平均ベクトル(μn(z|x), または〈Zn〉:  {} '.format(zn[:,0]))
 
 # #モデルの潜在変数zの導出 z=μの単位ベクトル
 # norm_u = np.linalg.norm(u)
