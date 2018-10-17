@@ -54,13 +54,10 @@ updated_x = b.x_upadate(x_list, u)
 print("X'n{}".format(updated_x))
 
 sigma_z_x = 1/2 #Σ(z|x)を求める。簡単なので手計算
-zn = sigma_z_x * (x_list - u)
-print('それぞれの平均ベクトル(μn(z|x), または〈Zn〉:  {} '.format(zn[:,0]))
+zn = (sigma_z_x * (x_list - u))[:,0]
+print('それぞれの平均ベクトル(μn(z|x), または〈Zn〉は  {} '.format(zn))
 
-# #モデルの潜在変数zの導出 z=μの単位ベクトル
-# norm_u = np.linalg.norm(u)
-# z = u/norm_u
-# print('潜在変数 (factor_z) {}'.format(z))
+
 
 #Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
 
