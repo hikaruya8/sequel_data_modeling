@@ -55,7 +55,11 @@ print("X'n{}".format(updated_x))
 
 sigma_z_x = 1/2 #Σ(z|x)を求める。簡単なので手計算
 zn = (sigma_z_x * (x_list - u))[:,0]
-print('それぞれの平均ベクトル(μn(z|x), または〈Zn〉は  {} '.format(zn))
+print('それぞれの平均ベクトル(μn(z|x), または[Z]nは{} '.format(zn))
+
+#〈ZZ^t〉nを求める
+zztn = 1/2 + zn * zn.T
+print('それぞれの共分散は[ZZ^Tn]は{}'.format(zztn))
 
 
 
