@@ -1,6 +1,7 @@
 import numpy as np
 import math
 
+n = 5 # サンプル数
 class FactorAnalysis:
   def __init__(self, b3, b2, b1, b0):
     self.b0 = b0
@@ -20,7 +21,7 @@ class FactorAnalysis:
     sum = 0
     for i in x_list:
       sum += i
-    u = sum/5
+    u = sum/n
     return u
 
   def x_upadate(self, x_list, u):
@@ -58,8 +59,9 @@ zn = (sigma_z_x * (x_list - u))[:,0]
 print('それぞれの平均ベクトル(μn(z|x), または[Z]nは{} '.format(zn))
 
 #〈ZZ^t〉nを求める
-zztn = 1/2 + zn * zn.T
+zztn = sigma_z_x + zn * zn.T
 print('それぞれの[ZZ^Tn]は{}'.format(zztn))
+
 
 
 
