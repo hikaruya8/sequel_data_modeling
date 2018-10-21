@@ -72,13 +72,6 @@ print('それぞれの平均ベクトル(μn(z|x), または[Z]nは{} '.format(z
 zztn = sigma_z_x + zn * zn.T
 print('それぞれの[ZZ^Tn]は{}'.format(zztn))
 
-# square_sum = []
-# for ux in updated_x:
-#   square_sum.append(np.dot(ux, ux.T))
-# print(square_sum)
-
-# print(np.dot(updated_x[0],updated_x[0].T))
-#Xn'* Xn'^Tを求める
 square_sum, latent_va, cross_sum = b.suff_statistics(updated_x, zztn)
 print('Sum of squared Samples:{}\nSum of expectations of squared latent variables:{}\nSumofcrossterms:{}'.format(square_sum, latent_va, cross_sum))
 
