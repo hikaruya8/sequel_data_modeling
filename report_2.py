@@ -30,6 +30,16 @@ class FactorAnalysis:
       updated_x.append(x - u)
     return updated_x
 
+  def suff_statistics(self, updated_x, zztn):
+    square_sum = []
+    latent_va = []
+    cross_sum = []
+    for ux, z in zip(updated_x, zztn):
+      square_sum.append(np.dot(ux, ux.T))
+      latent_va.append(np.dot(z, z.T))
+      cross_sum.append(np.dot(ux, z.T))
+    return square_sum, latent_va, cross_sum
+
 #初期値入力 いちいち入力がめんどいので後でinputに戻す
 # print('b3, b2, b1, b0 の順番に半角スペースを空けて入力してください')
 # b3, b2 , b1, b0 = map(int, input().split())
@@ -62,6 +72,15 @@ print('それぞれの平均ベクトル(μn(z|x), または[Z]nは{} '.format(z
 zztn = sigma_z_x + zn * zn.T
 print('それぞれの[ZZ^Tn]は{}'.format(zztn))
 
+# square_sum = []
+# for ux in updated_x:
+#   square_sum.append(np.dot(ux, ux.T))
+# print(square_sum)
+
+# print(np.dot(updated_x[0],updated_x[0].T))
+#Xn'* Xn'^Tを求める
+square_sum, latent_va, cross_sum = b.suff_statistics(updated_x, zztn)
+print('Sum of squared Samples:{}\nSum of expectations of squared latent variables:{}\nSumofcrossterms:{}'.format(square_sum, latent_va, cross_sum))
 
 
 
