@@ -76,10 +76,15 @@ square_sample, latent_va, cross_term = b.suff_statistics(updated_x, zztn)
 square_sum = np.sum(square_sample)
 latent_va_sum = np.sum(latent_va)
 cross_term_sum = np.sum(cross_term)
-print('Sum of squared Samples:{}\nSum of expectations of squared latent variables:{}\nSum of cross terms:{}'.format(square_sum, latent_va_sum, cross_term_sum))
+print("Sum of squared Samples(X'X'^T):{}\nSum of expectations of squared latent variables(ZZ^T):{}\nSum of cross terms(x'Z^T):{}".format(square_sum, latent_va_sum, cross_term_sum))
 
-ml_estimate = cross_term_sum * (1/latent_va_sum)
-print(ml_estimate)
+# ML estimate of loading matrix　負荷行列 -1<x<1
+ml_estimate_loading_matrix = cross_term_sum * (1/latent_va_sum)
+print('ML estimate of loading matrix(負荷行列):{}'.format(ml_estimate_loading_matrix)) 
+
+# ML estimate of covariance matrix 共分散行列の最尤推定 ML estimate= maximum likelihood estimataion
+# ml_estimate_covariance_matrix = 1/n()
+
 
 #Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
 
