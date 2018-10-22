@@ -31,14 +31,14 @@ class FactorAnalysis:
     return updated_x
 
   def suff_statistics(self, updated_x, zztn):
-    square_sum = []
+    square_sample = []
     latent_va = []
-    cross_sum = []
+    cross_term = []
     for ux, z in zip(updated_x, zztn):
-      square_sum.append(np.dot(ux, ux.T))
+      square_sample.append(np.dot(ux, ux.T))
       latent_va.append(np.dot(z, z.T))
-      cross_sum.append(np.dot(ux, z.T))
-    return square_sum, latent_va, cross_sum
+      cross_term.append(np.dot(ux, z.T))
+    return square_sample, latent_va, cross_term
 
 #初期値入力 いちいち入力がめんどいので後でinputに戻す
 # print('b3, b2, b1, b0 の順番に半角スペースを空けて入力してください')
@@ -72,10 +72,14 @@ print('それぞれの平均ベクトル(μn(z|x), または[Z]nは{} '.format(z
 zztn = sigma_z_x + zn * zn.T
 print('それぞれの[ZZ^Tn]は{}'.format(zztn))
 
-square_sum, latent_va, cross_sum = b.suff_statistics(updated_x, zztn)
-print('Sum of squared Samples:{}\nSum of expectations of squared latent variables:{}\nSumofcrossterms:{}'.format(square_sum, latent_va, cross_sum))
+square_sample, latent_va, cross_term = b.suff_statistics(updated_x, zztn)
+square_sum = np.sum(square_sample)
+latent_va_sum = np.sum(latent_va)
+cross_term_sum = np.sum(cross_term)
+print('Sum of squared Samples:{}\nSum of expectations of squared latent variables:{}\nSum of cross terms:{}'.format(square_sum, latent_va_sum, cross_term_sum))
 
-
+ml_estimate = cross_term_sum * (1/latent_va_sum)
+print(ml_estimate)
 
 #Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
 
