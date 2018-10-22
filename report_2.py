@@ -65,26 +65,25 @@ updated_x = b.x_upadate(x_list, u)
 print("X'n{}".format(updated_x))
 
 sigma_z_x = 1/2 #共分散Σ(z|x)を求める。簡単なので手計算
-zn = (sigma_z_x * (x_list - u))
-print('それぞれの平均ベクトル(μn(z|x), つまりZnは{} '.format(zn))
+zn = (sigma_z_x * (x_list - u))[:,0]
+print('それぞれの平均ベクトル(μn(z|x), つまり[Z]nは{} '.format(zn))
 
 #〈ZZ^t〉nを求める
 zztn = sigma_z_x + zn * zn.T
 print('それぞれの[ZZ^Tn]は{}'.format(zztn))
 
 square_sample, latent_va, cross_term = b.suff_statistics(updated_x, zztn)
-print("Sum of squared Samples(X'X'^T):{}\nSum of expectations of squared latent variables(ZZ^T):{}\nSum of cross terms(x'Z^T):{}".format(square_sample, latent_va, cross_term))
-
-# square_sum = np.sum(square_sample)
-# latent_va_sum = np.sum(latent_va)
-# cross_term_sum = np.sum(cross_term)
+square_sum = np.sum(square_sample)
+latent_va_sum = np.sum(latent_va)
+cross_term_sum = np.sum(cross_term)
+print("Sum of squared Samples(X'X'^T):{}\nSum of expectations of squared latent variables(ZZ^T):{}\nSum of cross terms(x'Z^T):{}".format(square_sum, latent_va_sum, cross_term_sum))
 
 # ML estimate of loading matrix　負荷行列 -1<x<1
-ml_estimate_loading_matrix = cross_term * (np.linalg.inv(latent_va))
+ml_estimate_loading_matrix = cross_term_sum * (1/latent_va_sum)
 print('ML estimate of loading matrix(負荷行列):{}'.format(ml_estimate_loading_matrix)) 
 
-# ML estimate of covariance matrix 共分散行列の最尤推定 ML estimate= maximum likelihood estimataion
-ml_estimate_covariance_matrix = 1/n * ((square_sum - cross_term_sum) * ml_estimate_loading_matrix.T)
+# ML estimate of covariance matrix ç ML estimate= maximum likelihood estimataion
+ml_estimate_covariance_matrix = 1/n * np.array((square_sum - cross_term_sum) * ml_estimate_loading_matrix.T)
 print('ML estimate of covariance matrix 共分散行列の最尤推定:{}'.format(ml_estimate_covariance_matrix))
 
 
