@@ -83,7 +83,8 @@ ml_estimate_loading_matrix = cross_term_sum * (1/latent_va_sum)
 print('ML estimate of loading matrix(負荷行列):{}'.format(ml_estimate_loading_matrix)) 
 
 # ML estimate of covariance matrix 共分散行列の最尤推定 ML estimate= maximum likelihood estimataion
-# ml_estimate_covariance_matrix = 1/n()
+ml_estimate_covariance_matrix = 1/n * ((square_sum - cross_term_sum) * ml_estimate_loading_matrix)
+print('ML estimate of covariance matrix 共分散行列の最尤推定:{}'.format(ml_estimate_covariance_matrix))
 
 
 #Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
