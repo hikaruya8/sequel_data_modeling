@@ -48,6 +48,13 @@ b3, b2, b1, b0 = 1, 4, 0, 3 #初期値.あとでinputできるように上と取
 
 b = FactorAnalysis(b3, b2, b1, b0) #インスタンス作成
 
+
+
+'''問題１
+Perform factor analysis using following data samples and initial model parameters.
+以下のサンプルデータと初期モデルパラメータを用いて因子分析をせよ。'''
+
+
 #D次元の確率変数Xn導出, X1=1次元??
 #D=Nこの観測点(データ集合）
 x1, x2, x3, x4, x5 = b.calc_x()
@@ -88,6 +95,9 @@ print('ML estimate of covariance matrix 共分散行列の最尤推定:{}'.forma
 
 
 #Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
+
+
+
 
 
 
