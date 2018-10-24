@@ -1,3 +1,7 @@
+'''問題１
+Perform factor analysis using following data samples and initial model parameters.
+以下のサンプルデータと初期モデルパラメータを用いて因子分析をせよ。'''
+
 import numpy as np
 import math
 
@@ -47,12 +51,6 @@ class FactorAnalysis:
 b3, b2, b1, b0 = 1, 4, 0, 3 #初期値.あとでinputできるように上と取り替える
 
 b = FactorAnalysis(b3, b2, b1, b0) #インスタンス作成
-
-
-
-'''問題１
-Perform factor analysis using following data samples and initial model parameters.
-以下のサンプルデータと初期モデルパラメータを用いて因子分析をせよ。'''
 
 
 #D次元の確率変数Xn導出, X1=1次元??
