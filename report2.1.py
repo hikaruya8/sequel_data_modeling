@@ -34,6 +34,12 @@ class FactorAnalysis:
       updated_x.append(x - u)
     return updated_x
 
+  def sum_of_squared_samples(self, updated_x, updated_xt):
+    ux_uxt = []
+    for ux, uxt in zip(updated_x, updated_xt):
+      ux_uxt.append(np.dot(ux, uxt))
+    return ux_uxt
+
   def suff_statistics(self, updated_x, zztn):
     square_sample = []
     latent_va = []
@@ -77,26 +83,42 @@ print('それぞれの平均ベクトル(μn(z|x), つまり[Z]nは{} '.format(z
 zztn = sigma_z_x + zn * zn.T
 print('それぞれの[ZZ^Tn]は{}'.format(zztn))
 
-square_sample, latent_va, cross_term = b.suff_statistics(updated_x, zztn)
-square_sum = np.sum(square_sample)
-latent_va_sum = np.sum(latent_va)
-cross_term_sum = np.sum(cross_term)
-print("Sum of squared Samples(X'X'^T):{}\nSum of expectations of squared latent variables(ZZ^T):{}\nSum of cross terms(x'Z^T):{}".format(square_sum, latent_va_sum, cross_term_sum))
+updated_xt_array = np.array(updated_x) #X'n^Tのndarray
+updated_x_array = updated_xt_array.T #X'nのndarray
+print(updated_xt_array)
+print(updated_x_array)
+
+
+
+# up_array_x = np.array(updated_x) #X'をarrayにする
+# up_array_x5 = np.split(up_array_x, 5) #X'を５分割する
+# print(up_array_x)
+# up_array_xt = up_array_x.T
+# up_array_xt2 = np.split(up_array_xt, 2)
+# print(up_array_xt2)
+# ux_uxt = []
+# for ux, uxt in zip(up_array_x5, up_array_xt2):
+#   print((np.dot(ux, uxt)))
+# up_array_xt = np.array(updated_x).T
+# print(up_array_xt)
+# np_array_xt = np.split(np.array(updated_x).T,5)
+# sum_of_squared_samples = b.sum_of_squared_samples(updated_x, updated_xt)
+# print(sum_of_squared_samples)
+# print("Sum of squared Samples(X'X'^T){}".format())
+
+# square_sample, latent_va, cross_term = b.suff_statistics(updated_x, zztn)
+# square_sum = np.sum(square_sample)
+# latent_va_sum = np.sum(latent_va)
+# cross_term_sum = np.sum(cross_term)
+# print("Sum of squared Samples(X'X'^T):{}\nSum of expectations of squared latent variables(ZZ^T):{}\nSum of cross terms(x'Z^T):{}".format(square_sum, latent_va_sum, cross_term_sum))
 
 # ML estimate of loading matrix　負荷行列 -1<x<1
-ml_estimate_loading_matrix = cross_term_sum * (1/latent_va_sum)
-print('ML estimate of loading matrix(負荷行列):{}'.format(ml_estimate_loading_matrix)) 
+# ml_estimate_loading_matrix = cross_term_sum * (1/latent_va_sum)
+# print('ML estimate of loading matrix(負荷行列):{}'.format(ml_estimate_loading_matrix))
 
-# ML estimate of covariance matrix ç ML estimate= maximum likelihood estimataion
-ml_estimate_covariance_matrix = 1/n * np.array((square_sum - cross_term_sum) * ml_estimate_loading_matrix.T)
-print('ML estimate of covariance matrix 共分散行列の最尤推定:{}'.format(ml_estimate_covariance_matrix))
+# # ML estimate of covariance matrix ç ML estimate= maximum likelihood estimataion
+# ml_estimate_covariance_matrix = 1/n * np.array((square_sum - cross_term_sum) * ml_estimate_loading_matrix.T)
+# print('ML estimate of covariance matrix 共分散行列の最尤推定:{}'.format(ml_estimate_covariance_matrix))
 
 
 #Σ=Covariance matrix 分散共分散行列 参考= https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%85%B1%E5%88%86%E6%95%A3%E8%A1%8C%E5%88%97
-
-
-
-
-
-
-
